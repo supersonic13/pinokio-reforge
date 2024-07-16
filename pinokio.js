@@ -1,6 +1,5 @@
 const path = require('path')
 const execSync = require('child_process').execSync
-const util = require('util')
 module.exports = {
   version: "1.2",
   title: "Re-Forge",
