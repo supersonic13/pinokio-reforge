@@ -1,4 +1,6 @@
 const path = require('path')
+const execSync = require('child_process').execSync
+const util = require('util')
 module.exports = {
   version: "1.2",
   title: "Re-Forge",
@@ -10,6 +12,24 @@ module.exports = {
     if (installing) {
       return [{ icon: "fa-solid fa-plug", text: "Installing", href: "install.js" }]
     } else if (installed) {
+      let apppath = path.resolve(__dirname, "app");
+      let commandAtPath = "cd";
+      commandAtPath = commandAtPath.concat(" ", apppath);
+      commandAtPath = commandAtPath.concat(' && git rev-parse --abbrev-ref HEAD');
+      let branchName = execSync(commandAtPath).toString()
+      branchName = branchName.trim()
+      let switchText
+      let switchFile
+      if(branchName == 'main')
+      {
+        switchText = "Switch to DEV"
+        switchFile = "switchtodev.json"
+      }
+      else
+      {
+        switchText = "Switch to Main (Stable)"
+        switchFile = "switchtomain.json"
+      }
       let running = kernel.running(__dirname, "start.js")
       let arr
       if (running) {
@@ -55,9 +75,7 @@ module.exports = {
       }, {
         icon: "fa-solid fa-rotate", text: "Update", href: "update.json"
       }, {
-        icon: "fa-solid fa-code-branch", text: "Switch to Main (stable)", href: "switchtomain.json"
-      }, {
-        icon: "fa-solid fa-code-branch", text: "Switch to DEV", href: "switchtodev.json"
+        icon: "fa-solid fa-code-branch", text: switchText, href: switchFile
       }, {
         icon: "fa-solid fa-plug", text: "Reinstall", href: "install.js"
       }])
