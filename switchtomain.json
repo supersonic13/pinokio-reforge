@@ -1,0 +1,9 @@
+{
+  "run": [{
+    "method": "shell.run",
+    "params": {
+      "message": "git checkout main",
+      "path": "app"
+    }
+  }]
+}

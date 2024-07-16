@@ -55,6 +55,10 @@ module.exports = {
       }, {
         icon: "fa-solid fa-rotate", text: "Update", href: "update.json"
       }, {
+        icon: "fa-solid fa-code-branch", text: "Switch to Main (stable)", href: "switchtomain.json"
+      }, {
+        icon: "fa-solid fa-code-branch", text: "Switch to DEV", href: "switchtodev.json"
+      }, {
         icon: "fa-solid fa-plug", text: "Reinstall", href: "install.js"
       }])
       if (!running) {
